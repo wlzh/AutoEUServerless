@@ -422,7 +422,7 @@ def get_gmail_pin(
     """
     try:
         # 连接到 Gmail IMAP 服务器
-        imap_server = "imap.gmail.com"
+        imap_server = "outlook.office365.com"
         imap = imaplib.IMAP4_SSL(imap_server)
         imap.login(mail_address, app_password)
 
