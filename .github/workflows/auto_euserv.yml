@@ -53,7 +53,7 @@ jobs:
             echo "## $(date -u +%FT%TZ) | renewal: ${{ steps.run.outcome }}"
             # 追加本次输出的最后 15 行，过滤掉可能含密钥的行
             grep -vaEi 'token|password|passwd|apikey|api_key|secret|authorization|bearer|app_password|cookie' /tmp/run.log 2>/dev/null | tail -n 15 || true
-          } >> RUNS.log
-          git add RUNS.log
+          } >> RUNS.md
+          git add RUNS.md
           git commit --allow-empty -m "chore: run record (${{ steps.run.outcome }}) $(date -u +%FT%TZ)"
           git push origin HEAD:${{ github.event.repository.default_branch }}
