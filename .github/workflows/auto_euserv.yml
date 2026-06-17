@@ -51,8 +51,12 @@ jobs:
           {
             echo ""
             echo "## $(date -u +%FT%TZ) | renewal: ${{ steps.run.outcome }}"
-            # 追加本次输出的最后 15 行，过滤掉可能含密钥的行
-            grep -vaEi 'token|password|passwd|apikey|api_key|secret|authorization|bearer|app_password|cookie' /tmp/run.log 2>/dev/null | tail -n 15 || true
+            echo "- event: ${{ github.event_name }}"
+            echo "- run_id: ${{ github.run_id }}"
+            echo "- run_attempt: ${{ github.run_attempt }}"
+            echo "- ref: ${{ github.ref_name }}"
+            echo "- commit: ${{ github.sha }}"
+            echo "- log: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           } >> RUNS.md
           git add RUNS.md
           git commit --allow-empty -m "chore: run record (${{ steps.run.outcome }}) $(date -u +%FT%TZ)"
